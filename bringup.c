@@ -30,6 +30,8 @@
         
  -------------------------- */
 
+#include  <stdint.h>
+ 
 #define  VERSION  "0.9"
 
 
@@ -102,11 +104,11 @@ FILE  * OutFile;
 
 void  CalcPrimes()
 {
-    static char  IsPrime[ MAX_PRIME_CANDIDATE+1 ];  
-    const  char  Yes = 1;
-    const  char  No  = 0;
+    static uint8_t  IsPrime[ MAX_PRIME_CANDIDATE+1 ];  
+    const  uint8_t  Yes = 1;
+    const  uint8_t  No  = 0;
 
-    int  i, j;  
+    uint32_t  i, j;  
       
 
     OUTPUT( "\nThe primes from 2 to %d are:\n", MAX_PRIME_CANDIDATE );
@@ -160,7 +162,7 @@ void  CalcPrimes()
 
 int  main( int argc,  char* argv[] )
 {
-    unsigned long  cycle;
+    uint32_t  cycle;
 
     
 #ifdef  MEASURE_TIME
