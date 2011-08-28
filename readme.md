@@ -4,8 +4,8 @@
 ### What is bringup.c?
 bringup.c is intended to be the first file compiled with a new embedded toolset
 or the first file run on a new embedded target.  It doesn't require an OS and,
-by default, it doesn't use any I/O, but both are supported with compile-time
-parameters.
+by default, it doesn't use any I/O.  However, I/O is supported with 
+compile-time parameters.
 
 ### What does it do?
 bringup.c finds prime numbers from 2 to a specified maximum.  By default, it
