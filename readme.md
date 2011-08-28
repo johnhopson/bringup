@@ -1,6 +1,6 @@
 #bringup
 
-----
+
 
 ## What is bringup.c?
 bringup.c is intended to be the first file compiled with a new embedded toolset
