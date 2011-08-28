@@ -6,7 +6,7 @@
    tools.  It calculates the sieve of Eratosthenes using various compile-time
    parameters.
  
- - In its simplest configuration (undefine USE_PRINTF and OUTPUT_FILE), this 
+ - In its simplest configuration (undefine USE_PRINTF and LOG_FILE), this 
    file is purely computational, making it useful for exercising new 
    compiler/debugger/target paths without requiring any target I/O.
 
@@ -22,7 +22,7 @@
       Print output to the console (but not to file).  
      
      gcc  -D MAX_PRIME_CANDIDATE=750  -D NUM_CYCLES=100  -D MEASURE_TIME \
-          -D USE_PRINTF  -D OUTPUT_FILE=\"bringup.log\"                  \
+          -D USE_PRINTF  -D LOG_FILE=\"bringup.log\"                  \
           -o bringup.exe  bringup.c
       Uses all options.  Find primes from 2 to 750, 100 times, and exit. 
       Print elapsed time before exit.  Print output to console and to 
@@ -71,14 +71,14 @@
 #endif
 
 
-//  Define OUTPUT_FILE to a file name to have 
+//  Define LOG_FILE to a file name to have 
 //  output go to said file.  Leaving it undefined
 //  turns off file I/O.
 
-#ifdef  OUTPUT_FILE
+#ifdef  LOG_FILE
 #include <stdio.h>
 #include <stdlib.h>
-FILE  * OutFile;
+FILE  * LogFile;
 #define  FPRINTF(a,b,c)  fprintf(a,b,c)
 #else
 #define  FPRINTF(a,b,c)
@@ -87,7 +87,7 @@ FILE  * OutFile;
 
 //  Output messages to console and/or file
 #define  OUTPUT(fmt, var)  PRINTF(fmt, var);  \
-                           FPRINTF( OutFile, fmt, var )
+                           FPRINTF( LogFile, fmt, var )
 
 
 
@@ -170,10 +170,10 @@ int  main( int argc,  char* argv[] )
 #endif
 
         
-#ifdef  OUTPUT_FILE
-    if (!(OutFile = fopen( OUTPUT_FILE, "wb" )))
+#ifdef  LOG_FILE
+    if (!(LogFile = fopen( LOG_FILE, "wb" )))
     {
-        PRINTF( "Unable to open output file: %s", OUTPUT_FILE );
+        PRINTF( "Unable to open output file: %s", LOG_FILE );
         exit(1);
     }
 #endif    
@@ -187,7 +187,7 @@ int  main( int argc,  char* argv[] )
          cycle <= NUM_CYCLES;
          cycle++)
     {
-        OUTPUT( "\nCycle: %ld" , cycle );
+        OUTPUT( "\nCycle: %d" , cycle );
         CalcPrimes();
     }
 #else
@@ -204,8 +204,8 @@ int  main( int argc,  char* argv[] )
 #endif  
 
 
-#ifdef  OUTPUT_FILE
-    fclose( OutFile );
+#ifdef  LOG_FILE
+    fclose( LogFile );
 #endif    
 
     return 0;
