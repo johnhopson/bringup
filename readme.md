@@ -5,13 +5,13 @@ or the first file run on a new embedded target.  It doesn't require an OS and,
 by default, it doesn't use any I/O.  However, I/O is supported with 
 compile-time parameters.
 
-### What does it do?
+### Details
 bringup.c finds prime numbers from 2 to a specified maximum.  By default, it
 runs one cycle and exits, and is purely computational.  Console or file 
 logging can be added at compile-time.  The algorithm is the 
 [prime sieve of Eratosthenes](http://en.wikipedia.org/wiki/Sieve_of_eratosthenes).
 
-### How do I compile it?
+### Usage
 
     gcc  -g -o bringup.exe  bringup.c
 
@@ -31,7 +31,7 @@ logging can be added at compile-time.  The algorithm is the
         Print elapsed time.  Print output to console and to file 
         'bringup.log'.
 
-### What else?
+### Other
 bringup.c can be used as a simple first-order benchmark.  It's advantage is
 simple and consistent configuration on any platform.  Comparisons are truly
 apples-and-apples.  Its disadvantage is its limited coverage.  In its most
