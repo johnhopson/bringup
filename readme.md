@@ -1,13 +1,13 @@
 #bringup
 - - - - - - - -
 bringup.c is intended to be the first file compiled with a new embedded toolset
-or the first file run on a new embedded target.  It doesn't require an OS and,
-by default, it doesn't use any I/O.  However, I/O is supported with 
+or the first file run on a new embedded target.  It doesn't require an OS, and
+by default it doesn't use any I/O, however, I/O is supported with 
 compile-time parameters.
 
 
 ### Details
-bringup.c finds prime numbers from 2 to a specified maximum.  By default, it
+bringup.c finds prime numbers from 2 to a specified maximum.  By default it
 runs one cycle and exits, and is purely computational.  Console or file 
 logging can be added at compile-time.  The algorithm is the 
 [prime sieve of Eratosthenes](http://en.wikipedia.org/wiki/Sieve_of_eratosthenes).
