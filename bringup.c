@@ -2,13 +2,13 @@
 
   Board Bring-Up Program
 
- - This is a first-test program for bringing up new boards or development
-   tools.  In its simplest build, this program is purely computational (no
-   I/O), making it easy to exercise the path between the tools and the 
-   target CPU core.
-   
-   Once the build/debugger/CPU path is known-good, this program can add 
-   printf output and file I/O via compile-time options.
+ - This is a simple program used to bring up a first-article microcontroller
+   board and to test the compiler/debugger toolchain to which it is attached.
+
+ - In its simplest form, this program is purely computational.  It requires
+   no OS and not even any I/O, making it useful for establishing the 
+   compiler/debugger/CPU path.  Once that path is established, bringup can 
+   add printf and file I/O for further testing.
 
  - This program can also serve as a simple first-order performance benchmark.
 

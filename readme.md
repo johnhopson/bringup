@@ -1,16 +1,20 @@
 #bringup
 - - - - - - - -
-bringup.c is intended to be the first file compiled with a new embedded toolset
-or the first file run on a new embedded target.  It doesn't require an OS, and
-by default it doesn't use any I/O, however, I/O is supported with 
-compile-time parameters.
+This is a simple program used to bring up a first-article microcontroller 
+board and to test the compiler/debugger toolchain to which it is attached.  
+
+In its simplest form, this program is purely computational.  It requires no
+OS and not even any I/O, making it useful for establishing the compiler/
+debugger/CPU path.  Once that path is established, bringup can add printf
+and file I/O for further testing.
 
 
 ### Details
-bringup.c finds prime numbers from 2 to a specified maximum.  By default it
-runs one cycle and exits, and is purely computational.  Console or file 
-logging can be added at compile-time.  The algorithm is the 
-[prime sieve of Eratosthenes](http://en.wikipedia.org/wiki/Sieve_of_eratosthenes).
+bringup.c finds prime numbers from 2 to a specified maximum.  The algorithm
+is the prime [sieve of Eratosthenes](http://en.wikipedia.org/wiki/Sieve_of_eratosthenes).
+
+By default it calculates primes and exits.  Compile time options may be used
+to run multiple calculation cycles, or add printf or file I/O.
 
 
 ### Usage
