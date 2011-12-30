@@ -13,11 +13,11 @@ logging can be added at compile-time.  The algorithm is the
 [prime sieve of Eratosthenes](http://en.wikipedia.org/wiki/Sieve_of_eratosthenes).
 
 
-### Compilation
+### Usage
 
-    gcc  -g -o bringup.exe  bringup.c
+    gcc  -g  -o bringup.exe  bringup.c
       Find primes from 2 to 1000 and exit. Purely computational.  
-      With debug information (-g).  No I/O.
+      With debug information (-g).  No I/O.  Run as 'bringup.exe'
 
     gcc  -D USE_PRINTF  -o bringup.exe  bringup.c
       Find primes from 2 to 1000.  Print output to the 
