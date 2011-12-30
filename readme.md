@@ -1,17 +1,19 @@
 #bringup
-
+- - - - - - - -
 bringup.c is intended to be the first file compiled with a new embedded toolset
 or the first file run on a new embedded target.  It doesn't require an OS and,
 by default, it doesn't use any I/O.  However, I/O is supported with 
 compile-time parameters.
 
-### What does it do?
+
+### Details
 bringup.c finds prime numbers from 2 to a specified maximum.  By default, it
 runs one cycle and exits, and is purely computational.  Console or file 
 logging can be added at compile-time.  The algorithm is the 
 [prime sieve of Eratosthenes](http://en.wikipedia.org/wiki/Sieve_of_eratosthenes).
 
-### How do I compile it?
+
+### Compilation
 
     gcc  -g -o bringup.exe  bringup.c
       Find primes from 2 to 1000 and exit. Purely computational.  
@@ -29,10 +31,19 @@ logging can be added at compile-time.  The algorithm is the
       exit. Print elapsed time.  Print output to console and to file 
       'bringup.log'.
 
-### What else?
-bringup.c can be used as a simple first-order benchmark.  It's advantage is
-simple and consistent configuration on any platform.  Comparisons are truly
-apples-and-apples.  Its disadvantage is its limited coverage.  In its most
-complex form, bringup.c exercises portions of the CPU core, console I/O and
-file I/O.
 
+### Testing
+bringup_test.rb is a test suite for bringup.c.  Type 'bringup_test.rb' to run
+the entire suite.  Type 'bringup_test.rb -h' to see usage, including how to 
+run individual tests.
+
+
+### Other
+bringup.c can be used as a simple first-order benchmark.  It's advantage is
+simplicity and consistency on any platform.  Comparisons are truly apples-and-
+apples.  Its disadvantage is its limited coverage.  In its most complex form, 
+bringup.c only exercises portions of the CPU core, console I/O and file I/O.
+
+
+### License
+Released under the MIT License.  See 'license' file.

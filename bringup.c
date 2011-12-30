@@ -1,4 +1,4 @@
-/* -------------------  Public Domain - 1998 - John Hopson  -------------------
+/* -------------------  (c)1998 john hopson  -------------------
 
   Board Bring-Up Program
 
@@ -18,18 +18,23 @@
        Find primes from 2 to 1000 and exit. Purely 
        computational.  With debug information (-g).  No I/O.
        
-    gcc  -D USE_PRINTF  -o bringup.exe  bringup.c
-      Find primes from 2 to 1000.  Print output to the 
-      console (but not to file).  
+     gcc  -D USE_PRINTF  -o bringup.exe  bringup.c
+       Find primes from 2 to 1000.  Print output to the 
+       console (but not to file).  
      
-    gcc  -D MAX_PRIME_CANDIDATE=750  -D NUM_CYCLES=100  -D MEASURE_TIME \
-         -D USE_PRINTF  -D LOG_FILE=\"bringup.log\"                  \
-         -o bringup.exe  bringup.c
-      Uses all options.  Find primes from 2 to 750, 100 times, and exit. 
-      Print elapsed time before exit.  Print output to console and to 
-      file 'bringup.log'. 
-        
- -------------------------- */
+     gcc  -D MAX_PRIME_CANDIDATE=750  -D NUM_CYCLES=100  -D MEASURE_TIME \
+          -D USE_PRINTF  -D LOG_FILE=\"bringup.log\"                  \
+          -o bringup.exe  bringup.c
+       Uses all options.  Find primes from 2 to 750, 100 times, and exit. 
+       Print elapsed time before exit.  Print output to console and to 
+       file 'bringup.log'. 
+
+ - Written and tested with gcc 4.2.1 on OS X.
+
+ - Hosted at github.com/johnhopson/bringup
+
+ - 'license' file has release terms
+*/
 
 #include  <stdint.h>
  
