@@ -2,28 +2,29 @@
 
   Board Bring-Up Program
 
- - This is a first-test program used to check out new boards or development
-   tools.  It calculates the sieve of Eratosthenes using various compile-time
-   parameters.
- 
- - In its simplest configuration (undefine USE_PRINTF and LOG_FILE), this 
-   file is purely computational, making it useful for exercising new 
-   compiler/debugger/target paths without requiring any target I/O.
+ - This is a first-test program for bringing up new boards or development
+   tools.  In its simplest build, this program is purely computational (no
+   I/O), making it easy to exercise the path between the tools and the 
+   target CPU core.
+   
+   Once the build/debugger/CPU path is known-good, this program can add 
+   printf output and file I/O via compile-time options.
 
  - This program can also serve as a simple first-order performance benchmark.
    
  - Example builds -
-     gcc  -o bringup.exe  bringup.c
-       Find primes from 2 to 1000 and exit. Purely computational.  
-       Uses no I/O.
+ 
+     gcc  -g -o bringup.exe  bringup.c 
+       Find primes from 2 to 1000 and exit. Purely 
+       computational.  With debug information (-g).  No I/O.
+       
+    gcc  -D USE_PRINTF  -o bringup.exe  bringup.c
+      Find primes from 2 to 1000.  Print output to the 
+      console (but not to file).  
      
-     gcc  -D NUM_CYCLES=0  -D USE_PRINTF  -o bringup.exe  bringup.c
-      Find primes from 2 to 1000.  Run forever until stopped.  
-      Print output to the console (but not to file).  
-     
-     gcc  -D MAX_PRIME_CANDIDATE=750  -D NUM_CYCLES=100  -D MEASURE_TIME \
-          -D USE_PRINTF  -D LOG_FILE=\"bringup.log\"                  \
-          -o bringup.exe  bringup.c
+    gcc  -D MAX_PRIME_CANDIDATE=750  -D NUM_CYCLES=100  -D MEASURE_TIME \
+         -D USE_PRINTF  -D LOG_FILE=\"bringup.log\"                  \
+         -o bringup.exe  bringup.c
       Uses all options.  Find primes from 2 to 750, 100 times, and exit. 
       Print elapsed time before exit.  Print output to console and to 
       file 'bringup.log'. 
@@ -32,7 +33,7 @@
 
 #include  <stdint.h>
  
-#define  VERSION  "0.9"
+#define  VERSION  "1.1"
 
 
 //  The highest number to check for prime.  
@@ -90,6 +91,10 @@ FILE  * LogFile;
                            FPRINTF( LogFile, fmt, var )
 
 
+static uint8_t  IsPrime[ MAX_PRIME_CANDIDATE+1 ];  
+const  uint8_t  Yes = 1;
+const  uint8_t  No  = 0;
+
 
 /* ---------------------------------------------------------------------
    Calculate primes and optionally print results to screen and/or file.
@@ -104,10 +109,6 @@ FILE  * LogFile;
 
 void  CalcPrimes()
 {
-    static uint8_t  IsPrime[ MAX_PRIME_CANDIDATE+1 ];  
-    const  uint8_t  Yes = 1;
-    const  uint8_t  No  = 0;
-
     uint32_t  i, j;  
       
 
@@ -180,9 +181,7 @@ int  main( int argc,  char* argv[] )
 
 
     OUTPUT( "bringup %s  (" __DATE__ ")\n", VERSION );
-  
-  
-#if  NUM_CYCLES > 0
+    
     for (cycle = 1;                       
          cycle <= NUM_CYCLES;
          cycle++)
@@ -190,12 +189,6 @@ int  main( int argc,  char* argv[] )
         OUTPUT( "\nCycle: %d" , cycle );
         CalcPrimes();
     }
-#else
-    while(1)
-    {
-        CalcPrimes();
-    }
-#endif
 
 
 #ifdef  MEASURE_TIME
