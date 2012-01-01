@@ -197,13 +197,14 @@ class TestBringup < Test::Unit::TestCase
     #  Impossible to guarantee generated date
     #  will be the same.
     
-    out = 'date comparison failed! - '
+    out = ""
     
-    compare.scan( /^bringup 1.1  \(([A-Za-z]{3}) (\d{2}) (\d{4})\)/ )  do  
+    compare.scan( /^bringup 1.1  \(([A-Za-z]{3})\s{1,2}(\d{1,2}) (\d{4})\)/ )  do  
       |month, day, year|
 
-      out = "bringup 1.1  (%s %s %s)\n" % [month, day, year]
-    end
+      out = "bringup 1.1  (%s %2s %s)\n" % [month, day, year]
+    end    
+    assert_not_equal "", out
     
     cycles.times  do |i|
       out +=                                             "\n" +
