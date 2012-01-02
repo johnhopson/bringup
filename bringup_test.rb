@@ -28,33 +28,31 @@ class TestBringup < Test::Unit::TestCase
 
        
   def  test_simplest_compile
-    begin
-      out = `gcc  -o bu.exe  bringup.c  2>&1`
-      assert_equal 0, $?.exitstatus
     
-      out += `./bu.exe  2>&1`  
-      assert_equal 0, $?.exitstatus
-      assert_equal "", out
-    ensure    
-      File.delete "bu.exe"  if File.exists? "bu.exe"
-    end
+    out = `gcc  -o bu.exe  bringup.c  2>&1`
+    assert_equal 0, $?.exitstatus
+  
+    out += `./bu.exe  2>&1`  
+    assert_equal 0, $?.exitstatus
+    assert_equal "", out
+  ensure    
+    File.delete "bu.exe"  if File.exists? "bu.exe"
   end
 
  
   def  test_use_of_file
-    begin
-      `gcc  -D LOG_FILE=\\"my.log\\" -o bu.exe  bringup.c  2>&1`
-      assert_equal 0, $?.exitstatus
     
-      `./bu.exe  2>&1`  
-      assert_equal 0, $?.exitstatus
-    
-      file = File.open( "my.log", "r" ).read
-      assert_equal expected_output(file), file
-    ensure    
-      File.delete "bu.exe"  if File.exists? "bu.exe"
-      File.delete "my.log"  if File.exists? "my.log"
-    end
+    `gcc  -D LOG_FILE=\\"my.log\\" -o bu.exe  bringup.c  2>&1`
+    assert_equal 0, $?.exitstatus
+  
+    `./bu.exe  2>&1`  
+    assert_equal 0, $?.exitstatus
+  
+    file = File.open( "my.log", "r" ).read
+    assert_equal expected_output(file), file
+  ensure    
+    File.delete "bu.exe"  if File.exists? "bu.exe"
+    File.delete "my.log"  if File.exists? "my.log"
   end
 
  
@@ -85,78 +83,74 @@ class TestBringup < Test::Unit::TestCase
 
  
   def  test_file_and_printf_together
-    begin
-      common_test  "-D LOG_FILE=\\\"my.log\\\""
     
-      file = File.open( "my.log", "r" ).read
-      assert_equal expected_output(file), file
-    ensure    
-      File.delete "my.log"  if File.exists? "my.log"
-    end
+    common_test  "-D LOG_FILE=\\\"my.log\\\""
+  
+    file = File.open( "my.log", "r" ).read
+    assert_equal expected_output(file), file
+  ensure    
+    File.delete "my.log"  if File.exists? "my.log"
   end
 
  
   def  test_many_params
-    begin
-      parms = {:maxprime => 2015,
-               :cycles   => 81,
-               :addtime  => true}
-
-      common_test  "-D LOG_FILE=\\\"my.log\\\" -D MAX_PRIME_CANDIDATE=2015 " +
-                   "-D NUM_CYCLES=81 -D MEASURE_TIME",
-                   parms
     
-      file = File.open( "my.log", "r" ).read
-      assert_equal expected_output(file, parms), file   
-    ensure    
-      File.delete "my.log"  if File.exists? "my.log"
-    end
+    parms = {:maxprime => 2015,
+             :cycles   => 81,
+             :addtime  => true}
+
+    common_test  "-D LOG_FILE=\\\"my.log\\\" -D MAX_PRIME_CANDIDATE=2015 " +
+                 "-D NUM_CYCLES=81 -D MEASURE_TIME",
+                 parms
+  
+    file = File.open( "my.log", "r" ).read
+    assert_equal expected_output(file, parms), file   
+  ensure    
+    File.delete "my.log"  if File.exists? "my.log"
   end
 
 
   def  test_that_c_compile_can_fail
 
-    begin
-      #  first, be sure copy compiles
-      FileUtils.copy( "bringup.c", "temp.c" )
-      out = `gcc  -o bu.exe  temp.c  2>&1`
-      assert_equal 0, $?.exitstatus
-      File.delete  "bu.exe"
-    
-      #  corrupt temp.c
-      text = File.read( "temp.c" )
-      text.gsub! /\}/, ""    
-      File.open( "temp.c", "w" ) { |f| f.puts text }  
+    #  first, be sure copy compiles
+    FileUtils.copy( "bringup.c", "temp.c" )
+    out = `gcc  -o bu.exe  temp.c  2>&1`
+    assert_equal 0, $?.exitstatus
+    File.delete  "bu.exe"
+  
+    #  corrupt temp.c
+    text = File.read( "temp.c" )
+    text.gsub! /\}/, ""    
+    File.open( "temp.c", "w" ) { |f| f.puts text }  
 
-      #  verify compile fails
-      out = `gcc  -o bu.exe  temp.c  2>&1`
-      assert_not_equal 0, $?.exitstatus
-    ensure    
-      File.delete "bu.exe"  if File.exists? "bu.exe"
-      File.delete "temp.c"  if File.exists? "temp.c"
-    end
+    #  verify compile fails
+    out = `gcc  -o bu.exe  temp.c  2>&1`
+    assert_not_equal 0, $?.exitstatus
+    
+  ensure    
+    File.delete "bu.exe"  if File.exists? "bu.exe"
+    File.delete "temp.c"  if File.exists? "temp.c"
   end
 
 
   def  test_that_output_comparison_can_fail
 
-    begin    
-      #  compile and run default config
-      out = `gcc  -D USE_PRINTF  -o bu.exe  bringup.c  2>&1`
-      assert_equal 0, $?.exitstatus
+    #  compile and run default config
+    out = `gcc  -D USE_PRINTF  -o bu.exe  bringup.c  2>&1`
+    assert_equal 0, $?.exitstatus
 
-      out += `./bu.exe  2>&1`  
-      assert_equal 0, $?.exitstatus
+    out += `./bu.exe  2>&1`  
+    assert_equal 0, $?.exitstatus
+  
+    expected = expected_output( out )
+    assert_equal  expected, out
+
+    #  remove info from expected output
+    #  and be sure it's not the same.
+    assert_not_equal  expected[0..-2], out
     
-      expected = expected_output( out )
-      assert_equal  expected, out
-
-      #  remove info from expected output
-      #  and be sure it's not the same.
-      assert_not_equal  expected[0..-2], out
-    ensure
-      File.delete "bu.exe"  if File.exists? "bu.exe"
-    end
+  ensure
+    File.delete "bu.exe"  if File.exists? "bu.exe"
   end
 
 
@@ -174,16 +168,15 @@ class TestBringup < Test::Unit::TestCase
 
     assert  File.exist?( "bu.exe" ) == false
 
-    begin    
-      out = `gcc  -D USE_PRINTF  #{cmdline} -o bu.exe  bringup.c  2>&1`
-      assert_equal 0, $?.exitstatus
+    out = `gcc  -D USE_PRINTF  #{cmdline} -o bu.exe  bringup.c  2>&1`
+    assert_equal 0, $?.exitstatus
 
-      out += `./bu.exe  2>&1`  
-      assert_equal 0, $?.exitstatus
-      assert_equal expected_output(out, expected), out 
-    ensure
-      File.delete "bu.exe"  if File.exists? "bu.exe"
-    end
+    out += `./bu.exe  2>&1`  
+    assert_equal 0, $?.exitstatus
+    assert_equal expected_output(out, expected), out 
+  
+  ensure
+    File.delete "bu.exe"  if File.exists? "bu.exe"
   end
 
   
