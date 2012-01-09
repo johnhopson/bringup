@@ -29,7 +29,7 @@ class TestBringup < Test::Unit::TestCase
        
   def  test_simplest_compile
     
-    out = `gcc  -o bu.exe  bringup.c  2>&1`
+    out = `gcc  -o bu.exe  ../bringup.c  2>&1`
     assert_equal 0, $?.exitstatus
   
     out += `./bu.exe  2>&1`  
@@ -42,7 +42,7 @@ class TestBringup < Test::Unit::TestCase
  
   def  test_use_of_file
     
-    `gcc  -D LOG_FILE=\\"my.log\\" -o bu.exe  bringup.c  2>&1`
+    `gcc  -D LOG_FILE=\\"my.log\\" -o bu.exe  ../bringup.c  2>&1`
     assert_equal 0, $?.exitstatus
   
     `./bu.exe  2>&1`  
@@ -113,7 +113,7 @@ class TestBringup < Test::Unit::TestCase
   def  test_that_c_compile_can_fail
 
     #  first, be sure copy compiles
-    FileUtils.copy( "bringup.c", "temp.c" )
+    FileUtils.copy( "../bringup.c", "temp.c" )
     out = `gcc  -o bu.exe  temp.c  2>&1`
     assert_equal 0, $?.exitstatus
     File.delete  "bu.exe"
@@ -136,7 +136,7 @@ class TestBringup < Test::Unit::TestCase
   def  test_that_output_comparison_can_fail
 
     #  compile and run default config
-    out = `gcc  -D USE_PRINTF  -o bu.exe  bringup.c  2>&1`
+    out = `gcc  -D USE_PRINTF  -o bu.exe  ../bringup.c  2>&1`
     assert_equal 0, $?.exitstatus
 
     out += `./bu.exe  2>&1`  
@@ -168,7 +168,7 @@ class TestBringup < Test::Unit::TestCase
 
     assert  File.exist?( "bu.exe" ) == false
 
-    out = `gcc  -D USE_PRINTF  #{cmdline} -o bu.exe  bringup.c  2>&1`
+    out = `gcc  -D USE_PRINTF  #{cmdline} -o bu.exe  ../bringup.c  2>&1`
     assert_equal 0, $?.exitstatus
 
     out += `./bu.exe  2>&1`  
