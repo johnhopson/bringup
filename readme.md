@@ -44,9 +44,10 @@ test/bringup_test.rb is a test suite for bringup.c.  To run the suite, cd to
 
 ### Other
 bringup.c can be used as a simple first-order benchmark.  It's advantage is
-simplicity and consistency on any platform.  Comparisons are truly apples-and-
-apples.  Its disadvantage is its limited coverage.  In its most complex form,
-bringup.c only exercises portions of the CPU core, console I/O and file I/O.
+simplicity and consistency on any platform.  Comparisons are truly 
+apples-to-apples.  Its disadvantage is its limited coverage.  In its most 
+complex form, bringup.c only exercises portions of the CPU core, console 
+I/O and file I/O.
 
 
 ### Source
