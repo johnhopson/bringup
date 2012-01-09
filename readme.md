@@ -1,4 +1,4 @@
-#bringup
+#bringup.c
 - - - - - - - -
 This is a simple program used to bring up a first-article microcontroller
 board or to test the compiler/debugger toolchain to which it is attached.
