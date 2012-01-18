@@ -35,8 +35,7 @@ printf or file I/O.
       exit. Print elapsed time.  Print output to console and to file
       'bringup.log'.
 
-gcc is not required.  It is only used as an example.  bringup.c should be
-highly portable.
+gcc is not required.  bringup.c should be portable to any C compiler.
 
 ### Testing
 test/bringup_test.rb is a test suite for bringup.c.  To run the suite, cd to
