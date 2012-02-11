@@ -11,7 +11,7 @@ compiler/debugger/CPU path.  Once that path is established, bringup can add
 printf and file I/O for further testing.
 
 The algorithm simply finds prime numbers from 2 to a specified maximum.  It
-uses the prime [sieve of Eratosthenes](http://en.wikipedia.org/wiki/Sieve_of_eratosthenes).
+uses the [Sieve of Eratosthenes](http://en.wikipedia.org/wiki/Sieve_of_eratosthenes).
 
 Compile time options may be used to run multiple calculation cycles, or add
 printf or file I/O.
@@ -51,6 +51,7 @@ complex form, bringup.c only exercises portions of the CPU core, console
 I/O and file I/O.
 
 
-### Source
-bringup is hosted at [github.com/johnhopson/bringup](http://github.com/johnhopson/bringup).
-It is released under the MIT license.  See 'license' file.
+## Other
+Written and tested with Ruby 1.8.7 on OS X 10.7.
+
+[![CC](http://i.creativecommons.org/l/by-sa/3.0/88x31.png)](http://creativecommons.org/licenses/by-sa/3.0/)   &nbsp;Licensed under [Creative Commons](http://creativecommons.org/licenses/by-sa/3.0/)

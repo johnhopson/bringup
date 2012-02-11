@@ -1,22 +1,17 @@
 #!/usr/bin/env ruby
-# ------------------  (c)2011 john hopson  -------------------
+# --------------------  (c)john hopson  --------------------
 #
 #  Test suite for bringup.c program.
-#
-#  - Get usage with 'bringup_test.rb -h'
 #
 #  - Binary file lengths have no significance, unless
 #    specified.  A variety of lengths are specified
 #    to increase coverage.
-#
+#  - Get usage with 'bringup_test.rb -h'
 #  - Requires GCC, but only basic features.
-#
-#  - Written and tested with ruby 1.8.7 on OS X.
-#
+#  - Written and tested with ruby 1.8.7 on OS X 10.7.
 #  - Hosted at github.com/johnhopson/bringup
-#
-#  - 'license' file has release terms
-#
+#  - Licensed per creativecommons.org/licenses/by-sa/3.0
+
 
 require 'test/unit'
 require 'time'

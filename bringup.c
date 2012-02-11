@@ -1,4 +1,4 @@
-/* -------------------  (c)1998 john hopson  -------------------
+/* --------------------  (c)john hopson  --------------------
 
   Board Bring-Up Program
 
@@ -14,12 +14,13 @@
 
  - See 'readme.md' for example builds.
 
- - Written and tested with gcc 4.2.1 on OS X.
+ - Written and tested with gcc 4.2.1 on OS X 10.7.
 
  - Hosted at github.com/johnhopson/bringup
 
- - 'license' file has release terms
+- licensed per creativecommons.org/licenses/by-sa/3.0
 */
+
 
 #include  <stdint.h>
 
